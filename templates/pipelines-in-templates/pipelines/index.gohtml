@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello world</title>
+</head>
+<body>
+    <p>Number {{.}}</p>
+    <ul>
+        <li>Square root: {{ sqrt .}}</li>
+        <li>Round: {{ round .}}</li>
+        <li>Power: {{ pow . 2 }}</li>
+        <li>{{ . | round | sqrt | pow 3 }}</li>
+    </ul>
+</body>
+</html>

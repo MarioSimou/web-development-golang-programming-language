@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello world</title>
+</head>
+<body> 
+    {{.}}
+
+    {{ $zero := index . 0  }}
+    {{ $first := index . 1}}
+    {{ $second := index . 2 }}
+
+    {{ if gt $zero $first }}
+        {{ $zero }} greater than {{ $first }}
+    {{ else  }}
+        {{ $first }} greater than {{ $zero }}
+    {{ end }}
+
+    {{ if lt $zero $first }}
+        {{ $zero }} is less than {{ $first }}
+    {{ else  }}
+        {{ $first }} less than {{ $zero }}
+    {{ end }}
+
+
+    {{ eq $zero $first }}
+
+    {{ if ne $second $first }}
+        {{ $second }} is not equal of {{ $first }}
+    {{ else  }}
+        {{ $first }} equal of {{ $second }}
+    {{ end }}
+</body>
+</html>

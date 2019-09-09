@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello world</title>
+</head>
+<body> 
+    {{.}}
+
+    {{ range .}}
+     {{ if not .Name}}
+        <p>No name has been found</p>
+     {{ else }}
+        <p>{{.Name}}</p>
+     {{ end }}
+    {{ end }}
+
+    {{ range . }}
+        {{ if and .Name .Admin  }}
+            {{ .Name }} is {{ .Admin }} and says {{ .Motto }}
+        {{ end }}
+    {{ end }}
+</body>
+</html>
