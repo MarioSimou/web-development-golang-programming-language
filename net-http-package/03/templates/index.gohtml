@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exploring Request Object</title>
+</head>
+<body>
+    <ul>
+        <li>URL: {{ .URL }}</li>
+        <li>Method: {{ .Method }}</li>
+        <li>Host: {{ .Host }}</li>
+        <li>Request URI: {{ .RequestUri }}</li>
+        <li>ContentLength: {{ .ContentLength }}</li>
+        <li>Headers
+            <ul>
+                {{ range $k, $v := .Headers }}
+                    {{ range $sv := $v }}
+                        <li>{{ $k }}: {{ $sv }} </li>
+                    {{ end }}
+                {{ end }}
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>

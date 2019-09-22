@@ -1,9 +1,0 @@
-{{ define "term" }}
-    <p>{{ .Term}}<p>
-        <p>Courses:</p>
-        <ul>
-        {{ range .Courses }}
-            <li>{{ .Number }} - {{ .Name }} - {{ .Units }}</li>
-        {{ end }}
-    </ul>
-{{ end }}

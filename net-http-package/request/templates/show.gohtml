@@ -1,9 +1,0 @@
-{{ define "show" }}
-    <ul>
-    {{ if . }}
-        {{ range $k,$v := . }}
-            <li>{{ $k }}- {{ index $v 0 }}</li>
-        {{ end }}
-    {{ end }}
-    </ul>
-{{ end }}W
