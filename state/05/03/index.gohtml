@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <form action="/" method="POST" enctype="text/plain">
+            <div>
+                <label for="fName">First name:</label>
+                <input type="text" id="fName" name="fName" placeholder="Your first name">
+            </div>
+            <div>
+                <label for="lName">Last name:</label>
+                <input type="text" id="lName" name="lName" placeholder="Your last name">
+            </div>
+            <div>
+                <label for="subscribed">Subscribed:</label>
+                <input type="checkbox" id="subscribed" name="subscribed">
+            </div>
+            <div>
+                <button>Submit</button>
+            </div>
+        </form>
+    </div>
+    <div>
+        {{ if . }}
+            <h4>Request body:</h4>
+            <p>{{.}}</p>
+        {{ end }}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Register</title>
+    </head>
+    <body>
+        <form method="POST" action="/">
+            <div>
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" name="fname" placeholder="Your name" />
+            </div>
+            <div>
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" name="lname" placeholder="Your last name" />
+            </div>
+            <div>
+                <label for="subscribed">Subscribed</label>
+                <input type="checkbox" id="subscribed" name="subscribed" />
+            </div>
+            <div>
+                <button>Submit</button>
+            </div>
+        </form>
+	    <br>
+        <div>
+            <p>First name: {{ .FirstName }}</p>
+            <p>Last name: {{ .LastName }}</p>
+            <p>Subscribed: {{ .Subscribed}}</p>
+        </div>
+    </body>
+</html>

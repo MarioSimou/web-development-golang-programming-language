@@ -38,12 +38,9 @@ func Contact(w http.ResponseWriter, r *http.Request) {
 func CookieMiddleware(next http.HandlerFunc) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if counter, _ := r.Cookie("counter"); counter != nil {
-			if v, _ := strconv.Atoi(counter.Value); v != 0 {
-				http.SetCookie(w, &http.Cookie{
-					Name:   "counter",
-					Value:  strconv.Itoa(v + 1),
-					MaxAge: 3600,
-				})
+			if v, _ := strconv.Atoi(counter.Value); v != 0 { // Ascii to Integer
+				counter.Value = strconv.Itoa(v + 1)
+				http.SetCookie(w, counter)
 			} else {
 				counter.Value = "1"
 			}
