@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 
@@ -41,51 +40,22 @@ func createUser(r *http.Request) (models.User, bool) {
 
 	return user, false
 }
-
-func createCookie(r *http.Request) (*http.Cookie, bool) {
-	var cookie http.Cookie
-	if cookieUUID, e := uuid.NewV4(); e == nil {
-		sid := cookieUUID.String()
-
-		cookie = http.Cookie{
-			Name:   "sid",
-			Value:  sid,
-			MaxAge: 3600,
-		}
-
-		return &cookie, true
-	}
-
-	return &cookie, false
-}
-
 func RegisterPost(tpl *template.Template, sessions map[string]string, db map[string]models.User) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-		c, _ := r.Cookie("sid")
-		fmt.Println("C: ", c)
-		if c != nil {
-			if _, ok := sessions[c.Name]; ok {
-				http.Redirect(w, r, "/", http.StatusPermanentRedirect)
-				return
-			}
-			// if a cookie exists delete it and recreate another one
-			c.MaxAge = -1
-			http.SetCookie(w, c)
+		cookie, _ := r.Cookie("sid")
+
+		if _, ok := sessions[cookie.Value]; ok {
+			tpl.ExecuteTemplate(w, "index.gohtml", "No reason to register")
+			return
 		}
 
-		if cookie, ok := createCookie(r); ok {
-			if user, ok := createUser(r); ok {
-				// Set-Cookie HTTP header
-				http.SetCookie(w, cookie)
-
-				sessions[cookie.Value] = user.Id
-				db[user.Id] = user
-
-				fmt.Println(db)
-
-				tpl.ExecuteTemplate(w, "index.gohtml", "Succesful registration")
-				return
-			}
+		if user, ok := createUser(r); ok {
+			// Set-Cookie HTTP header
+			http.SetCookie(w, cookie)
+			sessions[cookie.Value] = user.Id
+			db[user.Id] = user
+			tpl.ExecuteTemplate(w, "index.gohtml", "Succesful registration")
+			return
 		}
 	}
 }

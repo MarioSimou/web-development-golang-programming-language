@@ -22,9 +22,9 @@ func main() {
 	db := make(map[string]models.User)
 
 	router := httprouter.New()
-	router.GET("/", routes.IndexGet(tpl, sessions, db))
-	router.GET("/register", routes.RegisterGet(tpl, sessions, db))
-	router.POST("/register", routes.RegisterPost(tpl, sessions, db))
+	router.GET("/", utils.SetCookieMiddl(routes.IndexGet(tpl, sessions, db)))
+	router.GET("/register", utils.SetCookieMiddl(routes.RegisterGet(tpl, sessions, db)))
+	router.POST("/register", utils.SetCookieMiddl(routes.RegisterPost(tpl, sessions, db)))
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
