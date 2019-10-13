@@ -45,8 +45,10 @@ func SetCookieMiddl(next httprouter.Handle) httprouter.Handle {
 					MaxAge: 3600,
 				}
 
-				r.Header.Set("Set-Cookie", cookie.String())
-				http.SetCookie(w, &cookie) // sets cookie to writable
+				// Sets the HTTP Cookie header in the request
+				r.Header.Set("Cookie", cookie.String())
+				// Sets the HTTP Set-Cookie header in the response
+				http.SetCookie(w, &cookie)
 			}
 		}
 
