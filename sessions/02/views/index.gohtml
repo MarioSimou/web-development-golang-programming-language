@@ -8,13 +8,13 @@
 </head>
 <body>
     <div id="app">
-        {{ template "header" }}
-        <div>
-            Welcome to home page
-        </div>
-        {{ if . }}
-            <p>{{ . }}</p>
+        {{ template "header" .User }}
+        {{ if .Message.Type }}
+            {{ .Message.Content }}
         {{ end }}
+        <div>
+            <h1>Welcome to the home page</h1>
+        </div>
     </div>
 </body>
 </html>
