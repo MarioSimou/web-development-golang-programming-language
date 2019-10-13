@@ -27,6 +27,7 @@ func BooksGet(w http.ResponseWriter, r *http.Request) {
 	rows, e := db.Query("SELECT * FROM books;")
 	if e != nil {
 		log.Fatal(e)
+		return
 	}
 	defer rows.Close()
 
@@ -34,6 +35,7 @@ func BooksGet(w http.ResponseWriter, r *http.Request) {
 		var book Book
 		if e := rows.Scan(&book.Isbn, &book.Title, &book.Author, &book.Price); e != nil {
 			http.Error(w, e.Error(), http.StatusInternalServerError)
+			return
 		}
 
 		books.Data = append(books.Data, book)
