@@ -28,6 +28,7 @@ func marshal(w http.ResponseWriter, r *http.Request) {
 }
 
 func encode(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(200)
 	json.NewEncoder(w).Encode(user)
